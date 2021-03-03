@@ -10,7 +10,7 @@ mkdir build
 cd bakta-web-api
 git checkout main
 protoc --proto_path=. --go-grpc_out=../build --go_out=../build --go_opt=paths=source_relative --go-grpc_opt=paths=source_relative proto/api/*.proto
-protoc -I . --grpc-gateway_out ./proto/build --grpc-gateway_opt logtostderr=true --grpc-gateway_opt paths=source_relative proto/api/*
+protoc -I . --grpc-gateway_out ../build --grpc-gateway_opt logtostderr=true --grpc-gateway_opt paths=source_relative proto/api/*
 
 protoc -I . --openapiv2_out ../build --openapiv2_opt logtostderr=true proto/api/*
 
