@@ -16,7 +16,7 @@ protoc -I . --openapiv2_out ../build --openapiv2_opt logtostderr=true proto/api/
 
 cd ..
 
-#mv build/proto/api/Jobs.swagger.json swagger
+mv build/proto/api/Jobs.swagger.json swaggerhandler
 
 go generate swaggerhandler/SwaggerGen.go
 mv build/proto/api/*.go api

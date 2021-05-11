@@ -5,6 +5,11 @@
     "version": "0.1",
     "contact": {}
   },
+  "tags": [
+    {
+      "name": "BaktaJobs"
+    }
+  ],
   "schemes": [
     "https",
     "http"
@@ -248,6 +253,14 @@
         },
         "ResultFiles": {
           "type": "object"
+        },
+        "started": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -291,6 +304,14 @@
         },
         "jobStatus": {
           "$ref": "#/definitions/JobStatusEnum"
+        },
+        "started": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
