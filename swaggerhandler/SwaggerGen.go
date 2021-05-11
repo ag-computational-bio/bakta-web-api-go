@@ -27,6 +27,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err.Error())
 	}
+	log.Println("foo")
 
 	f, err := os.Create("Swagger.go")
 	if err != nil {
