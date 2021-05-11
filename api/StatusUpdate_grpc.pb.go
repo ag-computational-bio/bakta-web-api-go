@@ -11,6 +11,7 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the grpc package it is being compiled against.
+// Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
 // BaktaStatusUpdateClient is the client API for BaktaStatusUpdate service.
@@ -62,7 +63,7 @@ type UnsafeBaktaStatusUpdateServer interface {
 }
 
 func RegisterBaktaStatusUpdateServer(s grpc.ServiceRegistrar, srv BaktaStatusUpdateServer) {
-	s.RegisterService(&_BaktaStatusUpdate_serviceDesc, srv)
+	s.RegisterService(&BaktaStatusUpdate_ServiceDesc, srv)
 }
 
 func _BaktaStatusUpdate_UpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -83,7 +84,10 @@ func _BaktaStatusUpdate_UpdateStatus_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
-var _BaktaStatusUpdate_serviceDesc = grpc.ServiceDesc{
+// BaktaStatusUpdate_ServiceDesc is the grpc.ServiceDesc for BaktaStatusUpdate service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var BaktaStatusUpdate_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "BaktaStatusUpdate",
 	HandlerType: (*BaktaStatusUpdateServer)(nil),
 	Methods: []grpc.MethodDesc{
