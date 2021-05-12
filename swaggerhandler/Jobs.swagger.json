@@ -243,7 +243,15 @@
       }
     },
     "JobConfig": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "hasProdigal": {
+          "type": "boolean"
+        },
+        "hasReplicons": {
+          "type": "boolean"
+        }
+      }
     },
     "JobResultResponse": {
       "type": "object",
@@ -269,7 +277,7 @@
       "enum": [
         "INIT",
         "RUNNING",
-        "SUCCESFULL",
+        "SUCCESSFULL",
         "ERROR"
       ],
       "default": "INIT"
