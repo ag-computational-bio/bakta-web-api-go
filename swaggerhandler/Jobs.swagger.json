@@ -208,11 +208,36 @@
     }
   },
   "definitions": {
+    "DermType": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "monoderm",
+        "diderm"
+      ],
+      "default": "UNKNOWN"
+    },
     "Empty": {
       "type": "object"
     },
+    "FailedJob": {
+      "type": "object",
+      "properties": {
+        "jobID": {
+          "type": "string"
+        },
+        "jobStatus": {
+          "$ref": "#/definitions/JobFailedStatus"
+        }
+      }
+    },
     "InitJobRequest": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "repliconTableType": {
+          "$ref": "#/definitions/RepliconTableType"
+        }
+      }
     },
     "InitJobResponse": {
       "type": "object",
@@ -250,8 +275,48 @@
         },
         "hasReplicons": {
           "type": "boolean"
+        },
+        "translationalTable": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "completeGenome": {
+          "type": "boolean"
+        },
+        "keepContigHeaders": {
+          "type": "boolean"
+        },
+        "minContigLength": {
+          "type": "string",
+          "format": "int64"
+        },
+        "dermType": {
+          "$ref": "#/definitions/DermType"
+        },
+        "genus": {
+          "type": "string"
+        },
+        "species": {
+          "type": "string"
+        },
+        "strain": {
+          "type": "string"
+        },
+        "locus": {
+          "type": "string"
+        },
+        "locusTag": {
+          "type": "string"
         }
       }
+    },
+    "JobFailedStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_FOUND",
+        "UNAUTHORIZED"
+      ],
+      "default": "NOT_FOUND"
     },
     "JobResultResponse": {
       "type": "object",
@@ -290,6 +355,12 @@
           "items": {
             "$ref": "#/definitions/JobStatusResponse"
           }
+        },
+        "failedJobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FailedJob"
+          }
         }
       }
     },
@@ -322,6 +393,14 @@
           "format": "date-time"
         }
       }
+    },
+    "RepliconTableType": {
+      "type": "string",
+      "enum": [
+        "csv",
+        "tsv"
+      ],
+      "default": "csv"
     },
     "StartJobRequest": {
       "type": "object",
