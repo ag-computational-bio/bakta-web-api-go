@@ -302,6 +302,9 @@
         "strain": {
           "type": "string"
         },
+        "plasmid": {
+          "type": "string"
+        },
         "locus": {
           "type": "string"
         },
