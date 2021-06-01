@@ -19,9 +19,10 @@ const _ = grpc.SupportPackageIsVersion7
 type BaktaJobsClient interface {
 	InitJob(ctx context.Context, in *InitJobRequest, opts ...grpc.CallOption) (*InitJobResponse, error)
 	StartJob(ctx context.Context, in *StartJobRequest, opts ...grpc.CallOption) (*Empty, error)
-	GetJobsStatus(ctx context.Context, in *JobStatusRequestList, opts ...grpc.CallOption) (*JobStatusReponseList, error)
-	GetJobResult(ctx context.Context, in *JobAuth, opts ...grpc.CallOption) (*JobResultResponse, error)
+	JobsStatus(ctx context.Context, in *JobStatusRequestList, opts ...grpc.CallOption) (*JobStatusReponseList, error)
+	JobResult(ctx context.Context, in *JobAuth, opts ...grpc.CallOption) (*JobResultResponse, error)
 	Version(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*VersionResponse, error)
+	Delete(ctx context.Context, in *JobAuth, opts ...grpc.CallOption) (*Empty, error)
 }
 
 type baktaJobsClient struct {
@@ -50,18 +51,18 @@ func (c *baktaJobsClient) StartJob(ctx context.Context, in *StartJobRequest, opt
 	return out, nil
 }
 
-func (c *baktaJobsClient) GetJobsStatus(ctx context.Context, in *JobStatusRequestList, opts ...grpc.CallOption) (*JobStatusReponseList, error) {
+func (c *baktaJobsClient) JobsStatus(ctx context.Context, in *JobStatusRequestList, opts ...grpc.CallOption) (*JobStatusReponseList, error) {
 	out := new(JobStatusReponseList)
-	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/GetJobsStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/JobsStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *baktaJobsClient) GetJobResult(ctx context.Context, in *JobAuth, opts ...grpc.CallOption) (*JobResultResponse, error) {
+func (c *baktaJobsClient) JobResult(ctx context.Context, in *JobAuth, opts ...grpc.CallOption) (*JobResultResponse, error) {
 	out := new(JobResultResponse)
-	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/GetJobResult", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/JobResult", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -77,15 +78,25 @@ func (c *baktaJobsClient) Version(ctx context.Context, in *Empty, opts ...grpc.C
 	return out, nil
 }
 
+func (c *baktaJobsClient) Delete(ctx context.Context, in *JobAuth, opts ...grpc.CallOption) (*Empty, error) {
+	out := new(Empty)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/Delete", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BaktaJobsServer is the server API for BaktaJobs service.
 // All implementations should embed UnimplementedBaktaJobsServer
 // for forward compatibility
 type BaktaJobsServer interface {
 	InitJob(context.Context, *InitJobRequest) (*InitJobResponse, error)
 	StartJob(context.Context, *StartJobRequest) (*Empty, error)
-	GetJobsStatus(context.Context, *JobStatusRequestList) (*JobStatusReponseList, error)
-	GetJobResult(context.Context, *JobAuth) (*JobResultResponse, error)
+	JobsStatus(context.Context, *JobStatusRequestList) (*JobStatusReponseList, error)
+	JobResult(context.Context, *JobAuth) (*JobResultResponse, error)
 	Version(context.Context, *Empty) (*VersionResponse, error)
+	Delete(context.Context, *JobAuth) (*Empty, error)
 }
 
 // UnimplementedBaktaJobsServer should be embedded to have forward compatible implementations.
@@ -98,14 +109,17 @@ func (UnimplementedBaktaJobsServer) InitJob(context.Context, *InitJobRequest) (*
 func (UnimplementedBaktaJobsServer) StartJob(context.Context, *StartJobRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartJob not implemented")
 }
-func (UnimplementedBaktaJobsServer) GetJobsStatus(context.Context, *JobStatusRequestList) (*JobStatusReponseList, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetJobsStatus not implemented")
+func (UnimplementedBaktaJobsServer) JobsStatus(context.Context, *JobStatusRequestList) (*JobStatusReponseList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JobsStatus not implemented")
 }
-func (UnimplementedBaktaJobsServer) GetJobResult(context.Context, *JobAuth) (*JobResultResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetJobResult not implemented")
+func (UnimplementedBaktaJobsServer) JobResult(context.Context, *JobAuth) (*JobResultResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JobResult not implemented")
 }
 func (UnimplementedBaktaJobsServer) Version(context.Context, *Empty) (*VersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Version not implemented")
+}
+func (UnimplementedBaktaJobsServer) Delete(context.Context, *JobAuth) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 
 // UnsafeBaktaJobsServer may be embedded to opt out of forward compatibility for this service.
@@ -155,38 +169,38 @@ func _BaktaJobs_StartJob_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BaktaJobs_GetJobsStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BaktaJobs_JobsStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(JobStatusRequestList)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BaktaJobsServer).GetJobsStatus(ctx, in)
+		return srv.(BaktaJobsServer).JobsStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/GetJobsStatus",
+		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/JobsStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BaktaJobsServer).GetJobsStatus(ctx, req.(*JobStatusRequestList))
+		return srv.(BaktaJobsServer).JobsStatus(ctx, req.(*JobStatusRequestList))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BaktaJobs_GetJobResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _BaktaJobs_JobResult_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(JobAuth)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BaktaJobsServer).GetJobResult(ctx, in)
+		return srv.(BaktaJobsServer).JobResult(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/GetJobResult",
+		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/JobResult",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BaktaJobsServer).GetJobResult(ctx, req.(*JobAuth))
+		return srv.(BaktaJobsServer).JobResult(ctx, req.(*JobAuth))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -209,6 +223,24 @@ func _BaktaJobs_Version_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BaktaJobs_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JobAuth)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BaktaJobsServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/Delete",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BaktaJobsServer).Delete(ctx, req.(*JobAuth))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _BaktaJobs_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "bakta.web.api.proto.v1.BaktaJobs",
 	HandlerType: (*BaktaJobsServer)(nil),
@@ -222,16 +254,20 @@ var _BaktaJobs_serviceDesc = grpc.ServiceDesc{
 			Handler:    _BaktaJobs_StartJob_Handler,
 		},
 		{
-			MethodName: "GetJobsStatus",
-			Handler:    _BaktaJobs_GetJobsStatus_Handler,
+			MethodName: "JobsStatus",
+			Handler:    _BaktaJobs_JobsStatus_Handler,
 		},
 		{
-			MethodName: "GetJobResult",
-			Handler:    _BaktaJobs_GetJobResult_Handler,
+			MethodName: "JobResult",
+			Handler:    _BaktaJobs_JobResult_Handler,
 		},
 		{
 			MethodName: "Version",
 			Handler:    _BaktaJobs_Version_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _BaktaJobs_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

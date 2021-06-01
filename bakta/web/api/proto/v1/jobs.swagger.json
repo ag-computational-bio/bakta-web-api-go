@@ -21,6 +21,49 @@
     "application/json"
   ],
   "paths": {
+    "/api/v1/delete": {
+      "get": {
+        "operationId": "BaktaJobs_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1Empty"
+            }
+          },
+          "404": {
+            "description": "Returned when the resource does not exist.",
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "secret",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "jobID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "BaktaJobs"
+        ]
+      }
+    },
     "/api/v1/job/init": {
       "post": {
         "operationId": "BaktaJobs_InitJob",
@@ -62,7 +105,7 @@
     },
     "/api/v1/job/list": {
       "post": {
-        "operationId": "BaktaJobs_GetJobsStatus",
+        "operationId": "BaktaJobs_JobsStatus",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -101,7 +144,7 @@
     },
     "/api/v1/job/result": {
       "post": {
-        "operationId": "BaktaJobs_GetJobResult",
+        "operationId": "BaktaJobs_JobResult",
         "responses": {
           "200": {
             "description": "A successful response.",

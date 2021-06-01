@@ -99,7 +99,7 @@ func local_request_BaktaJobs_StartJob_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func request_BaktaJobs_GetJobsStatus_0(ctx context.Context, marshaler runtime.Marshaler, client BaktaJobsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BaktaJobs_JobsStatus_0(ctx context.Context, marshaler runtime.Marshaler, client BaktaJobsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq JobStatusRequestList
 	var metadata runtime.ServerMetadata
 
@@ -111,12 +111,12 @@ func request_BaktaJobs_GetJobsStatus_0(ctx context.Context, marshaler runtime.Ma
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.GetJobsStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.JobsStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_BaktaJobs_GetJobsStatus_0(ctx context.Context, marshaler runtime.Marshaler, server BaktaJobsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BaktaJobs_JobsStatus_0(ctx context.Context, marshaler runtime.Marshaler, server BaktaJobsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq JobStatusRequestList
 	var metadata runtime.ServerMetadata
 
@@ -128,12 +128,12 @@ func local_request_BaktaJobs_GetJobsStatus_0(ctx context.Context, marshaler runt
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.GetJobsStatus(ctx, &protoReq)
+	msg, err := server.JobsStatus(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_BaktaJobs_GetJobResult_0(ctx context.Context, marshaler runtime.Marshaler, client BaktaJobsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_BaktaJobs_JobResult_0(ctx context.Context, marshaler runtime.Marshaler, client BaktaJobsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq JobAuth
 	var metadata runtime.ServerMetadata
 
@@ -145,12 +145,12 @@ func request_BaktaJobs_GetJobResult_0(ctx context.Context, marshaler runtime.Mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.GetJobResult(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.JobResult(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_BaktaJobs_GetJobResult_0(ctx context.Context, marshaler runtime.Marshaler, server BaktaJobsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_BaktaJobs_JobResult_0(ctx context.Context, marshaler runtime.Marshaler, server BaktaJobsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq JobAuth
 	var metadata runtime.ServerMetadata
 
@@ -162,7 +162,7 @@ func local_request_BaktaJobs_GetJobResult_0(ctx context.Context, marshaler runti
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.GetJobResult(ctx, &protoReq)
+	msg, err := server.JobResult(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -181,6 +181,42 @@ func local_request_BaktaJobs_Version_0(ctx context.Context, marshaler runtime.Ma
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.Version(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+var (
+	filter_BaktaJobs_Delete_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+)
+
+func request_BaktaJobs_Delete_0(ctx context.Context, marshaler runtime.Marshaler, client BaktaJobsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq JobAuth
+	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_BaktaJobs_Delete_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.Delete(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_BaktaJobs_Delete_0(ctx context.Context, marshaler runtime.Marshaler, server BaktaJobsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq JobAuth
+	var metadata runtime.ServerMetadata
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_BaktaJobs_Delete_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.Delete(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -237,18 +273,18 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
-	mux.Handle("POST", pattern_BaktaJobs_GetJobsStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BaktaJobs_JobsStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/GetJobsStatus")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobsStatus")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_BaktaJobs_GetJobsStatus_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BaktaJobs_JobsStatus_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -256,22 +292,22 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_BaktaJobs_GetJobsStatus_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BaktaJobs_JobsStatus_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_BaktaJobs_GetJobResult_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BaktaJobs_JobResult_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/GetJobResult")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobResult")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_BaktaJobs_GetJobResult_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_BaktaJobs_JobResult_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -279,7 +315,7 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 			return
 		}
 
-		forward_BaktaJobs_GetJobResult_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BaktaJobs_JobResult_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -303,6 +339,29 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		}
 
 		forward_BaktaJobs_Version_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_BaktaJobs_Delete_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Delete")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_BaktaJobs_Delete_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_BaktaJobs_Delete_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -387,43 +446,43 @@ func RegisterBaktaJobsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
-	mux.Handle("POST", pattern_BaktaJobs_GetJobsStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BaktaJobs_JobsStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/GetJobsStatus")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobsStatus")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_BaktaJobs_GetJobsStatus_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BaktaJobs_JobsStatus_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_BaktaJobs_GetJobsStatus_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BaktaJobs_JobsStatus_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_BaktaJobs_GetJobResult_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_BaktaJobs_JobResult_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/GetJobResult")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobResult")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_BaktaJobs_GetJobResult_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_BaktaJobs_JobResult_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_BaktaJobs_GetJobResult_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_BaktaJobs_JobResult_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -447,6 +506,26 @@ func RegisterBaktaJobsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 
 	})
 
+	mux.Handle("GET", pattern_BaktaJobs_Delete_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Delete")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_BaktaJobs_Delete_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_BaktaJobs_Delete_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -455,11 +534,13 @@ var (
 
 	pattern_BaktaJobs_StartJob_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "job", "start"}, ""))
 
-	pattern_BaktaJobs_GetJobsStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "job", "list"}, ""))
+	pattern_BaktaJobs_JobsStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "job", "list"}, ""))
 
-	pattern_BaktaJobs_GetJobResult_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "job", "result"}, ""))
+	pattern_BaktaJobs_JobResult_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "job", "result"}, ""))
 
 	pattern_BaktaJobs_Version_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "version"}, ""))
+
+	pattern_BaktaJobs_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v1", "delete"}, ""))
 )
 
 var (
@@ -467,9 +548,11 @@ var (
 
 	forward_BaktaJobs_StartJob_0 = runtime.ForwardResponseMessage
 
-	forward_BaktaJobs_GetJobsStatus_0 = runtime.ForwardResponseMessage
+	forward_BaktaJobs_JobsStatus_0 = runtime.ForwardResponseMessage
 
-	forward_BaktaJobs_GetJobResult_0 = runtime.ForwardResponseMessage
+	forward_BaktaJobs_JobResult_0 = runtime.ForwardResponseMessage
 
 	forward_BaktaJobs_Version_0 = runtime.ForwardResponseMessage
+
+	forward_BaktaJobs_Delete_0 = runtime.ForwardResponseMessage
 )
