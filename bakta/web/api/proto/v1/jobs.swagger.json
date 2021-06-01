@@ -22,7 +22,7 @@
   ],
   "paths": {
     "/api/v1/delete": {
-      "get": {
+      "delete": {
         "operationId": "BaktaJobs_Delete",
         "responses": {
           "200": {
