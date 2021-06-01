@@ -34,7 +34,7 @@ func NewBaktaJobsClient(cc grpc.ClientConnInterface) BaktaJobsClient {
 
 func (c *baktaJobsClient) InitJob(ctx context.Context, in *InitJobRequest, opts ...grpc.CallOption) (*InitJobResponse, error) {
 	out := new(InitJobResponse)
-	err := c.cc.Invoke(ctx, "/BaktaJobs/InitJob", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/InitJob", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ func (c *baktaJobsClient) InitJob(ctx context.Context, in *InitJobRequest, opts 
 
 func (c *baktaJobsClient) StartJob(ctx context.Context, in *StartJobRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/BaktaJobs/StartJob", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/StartJob", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +52,7 @@ func (c *baktaJobsClient) StartJob(ctx context.Context, in *StartJobRequest, opt
 
 func (c *baktaJobsClient) GetJobsStatus(ctx context.Context, in *JobStatusRequestList, opts ...grpc.CallOption) (*JobStatusReponseList, error) {
 	out := new(JobStatusReponseList)
-	err := c.cc.Invoke(ctx, "/BaktaJobs/GetJobsStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/GetJobsStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +61,7 @@ func (c *baktaJobsClient) GetJobsStatus(ctx context.Context, in *JobStatusReques
 
 func (c *baktaJobsClient) GetJobResult(ctx context.Context, in *JobAuth, opts ...grpc.CallOption) (*JobResultResponse, error) {
 	out := new(JobResultResponse)
-	err := c.cc.Invoke(ctx, "/BaktaJobs/GetJobResult", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/GetJobResult", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -70,7 +70,7 @@ func (c *baktaJobsClient) GetJobResult(ctx context.Context, in *JobAuth, opts ..
 
 func (c *baktaJobsClient) Version(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*VersionResponse, error) {
 	out := new(VersionResponse)
-	err := c.cc.Invoke(ctx, "/BaktaJobs/Version", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaJobs/Version", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func (c *baktaJobsClient) Version(ctx context.Context, in *Empty, opts ...grpc.C
 }
 
 // BaktaJobsServer is the server API for BaktaJobs service.
-// All implementations must embed UnimplementedBaktaJobsServer
+// All implementations should embed UnimplementedBaktaJobsServer
 // for forward compatibility
 type BaktaJobsServer interface {
 	InitJob(context.Context, *InitJobRequest) (*InitJobResponse, error)
@@ -86,10 +86,9 @@ type BaktaJobsServer interface {
 	GetJobsStatus(context.Context, *JobStatusRequestList) (*JobStatusReponseList, error)
 	GetJobResult(context.Context, *JobAuth) (*JobResultResponse, error)
 	Version(context.Context, *Empty) (*VersionResponse, error)
-	mustEmbedUnimplementedBaktaJobsServer()
 }
 
-// UnimplementedBaktaJobsServer must be embedded to have forward compatible implementations.
+// UnimplementedBaktaJobsServer should be embedded to have forward compatible implementations.
 type UnimplementedBaktaJobsServer struct {
 }
 
@@ -108,7 +107,6 @@ func (UnimplementedBaktaJobsServer) GetJobResult(context.Context, *JobAuth) (*Jo
 func (UnimplementedBaktaJobsServer) Version(context.Context, *Empty) (*VersionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Version not implemented")
 }
-func (UnimplementedBaktaJobsServer) mustEmbedUnimplementedBaktaJobsServer() {}
 
 // UnsafeBaktaJobsServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to BaktaJobsServer will
@@ -131,7 +129,7 @@ func _BaktaJobs_InitJob_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/BaktaJobs/InitJob",
+		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/InitJob",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BaktaJobsServer).InitJob(ctx, req.(*InitJobRequest))
@@ -149,7 +147,7 @@ func _BaktaJobs_StartJob_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/BaktaJobs/StartJob",
+		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/StartJob",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BaktaJobsServer).StartJob(ctx, req.(*StartJobRequest))
@@ -167,7 +165,7 @@ func _BaktaJobs_GetJobsStatus_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/BaktaJobs/GetJobsStatus",
+		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/GetJobsStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BaktaJobsServer).GetJobsStatus(ctx, req.(*JobStatusRequestList))
@@ -185,7 +183,7 @@ func _BaktaJobs_GetJobResult_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/BaktaJobs/GetJobResult",
+		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/GetJobResult",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BaktaJobsServer).GetJobResult(ctx, req.(*JobAuth))
@@ -203,7 +201,7 @@ func _BaktaJobs_Version_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/BaktaJobs/Version",
+		FullMethod: "/bakta.web.api.proto.v1.BaktaJobs/Version",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BaktaJobsServer).Version(ctx, req.(*Empty))
@@ -212,7 +210,7 @@ func _BaktaJobs_Version_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 var _BaktaJobs_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "BaktaJobs",
+	ServiceName: "bakta.web.api.proto.v1.BaktaJobs",
 	HandlerType: (*BaktaJobsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -237,5 +235,5 @@ var _BaktaJobs_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/api/Jobs.proto",
+	Metadata: "bakta/web/api/proto/v1/jobs.proto",
 }

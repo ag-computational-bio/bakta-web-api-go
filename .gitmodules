@@ -1,0 +1,3 @@
+[submodule "bakta-web-api"]
+	path = bakta-web-api
+	url = https://github.com/ag-computational-bio/bakta-web-api.git

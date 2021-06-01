@@ -30,7 +30,7 @@ func NewBaktaStatusUpdateClient(cc grpc.ClientConnInterface) BaktaStatusUpdateCl
 
 func (c *baktaStatusUpdateClient) UpdateStatus(ctx context.Context, in *UpdateStatusRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/BaktaStatusUpdate/UpdateStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/bakta.web.api.proto.v1.BaktaStatusUpdate/UpdateStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -38,21 +38,19 @@ func (c *baktaStatusUpdateClient) UpdateStatus(ctx context.Context, in *UpdateSt
 }
 
 // BaktaStatusUpdateServer is the server API for BaktaStatusUpdate service.
-// All implementations must embed UnimplementedBaktaStatusUpdateServer
+// All implementations should embed UnimplementedBaktaStatusUpdateServer
 // for forward compatibility
 type BaktaStatusUpdateServer interface {
 	UpdateStatus(context.Context, *UpdateStatusRequest) (*Empty, error)
-	mustEmbedUnimplementedBaktaStatusUpdateServer()
 }
 
-// UnimplementedBaktaStatusUpdateServer must be embedded to have forward compatible implementations.
+// UnimplementedBaktaStatusUpdateServer should be embedded to have forward compatible implementations.
 type UnimplementedBaktaStatusUpdateServer struct {
 }
 
 func (UnimplementedBaktaStatusUpdateServer) UpdateStatus(context.Context, *UpdateStatusRequest) (*Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateStatus not implemented")
 }
-func (UnimplementedBaktaStatusUpdateServer) mustEmbedUnimplementedBaktaStatusUpdateServer() {}
 
 // UnsafeBaktaStatusUpdateServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to BaktaStatusUpdateServer will
@@ -75,7 +73,7 @@ func _BaktaStatusUpdate_UpdateStatus_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/BaktaStatusUpdate/UpdateStatus",
+		FullMethod: "/bakta.web.api.proto.v1.BaktaStatusUpdate/UpdateStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BaktaStatusUpdateServer).UpdateStatus(ctx, req.(*UpdateStatusRequest))
@@ -84,7 +82,7 @@ func _BaktaStatusUpdate_UpdateStatus_Handler(srv interface{}, ctx context.Contex
 }
 
 var _BaktaStatusUpdate_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "BaktaStatusUpdate",
+	ServiceName: "bakta.web.api.proto.v1.BaktaStatusUpdate",
 	HandlerType: (*BaktaStatusUpdateServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -93,5 +91,5 @@ var _BaktaStatusUpdate_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/api/StatusUpdate.proto",
+	Metadata: "bakta/web/api/proto/v1/status_update.proto",
 }
