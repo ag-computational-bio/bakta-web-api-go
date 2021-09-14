@@ -394,6 +394,9 @@
         },
         "locusTag": {
           "type": "string"
+        },
+        "hasCompliant": {
+          "type": "boolean"
         }
       }
     },
@@ -503,9 +506,6 @@
         },
         "config": {
           "$ref": "#/definitions/v1JobConfig"
-        },
-        "jobConfigString": {
-          "type": "string"
         }
       }
     },

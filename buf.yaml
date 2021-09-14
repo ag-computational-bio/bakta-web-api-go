@@ -43,5 +43,3 @@ lint:
     RPC_RESPONSE_STANDARD_NAME:
       - bakta/web/api/proto/v1/jobs.proto
       - bakta/web/api/proto/v1/status_update.proto
-deps:
-  - buf.build/beta/googleapis
