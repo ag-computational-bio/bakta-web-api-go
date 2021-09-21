@@ -395,7 +395,7 @@
         "locusTag": {
           "type": "string"
         },
-        "hasCompliant": {
+        "compliant": {
           "type": "boolean"
         }
       }

@@ -233,7 +233,7 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/InitJob", runtime.WithHTTPPathPattern("/api/v1/job/init"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/InitJob")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -256,7 +256,7 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/StartJob", runtime.WithHTTPPathPattern("/api/v1/job/start"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/StartJob")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -279,7 +279,7 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobsStatus", runtime.WithHTTPPathPattern("/api/v1/job/list"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobsStatus")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -302,7 +302,7 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobResult", runtime.WithHTTPPathPattern("/api/v1/job/result"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobResult")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -325,7 +325,7 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Version", runtime.WithHTTPPathPattern("/api/v1/version"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Version")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -348,7 +348,7 @@ func RegisterBaktaJobsHandlerServer(ctx context.Context, mux *runtime.ServeMux, 
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Delete", runtime.WithHTTPPathPattern("/api/v1/delete"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Delete")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -410,7 +410,7 @@ func RegisterBaktaJobsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/InitJob", runtime.WithHTTPPathPattern("/api/v1/job/init"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/InitJob")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -430,7 +430,7 @@ func RegisterBaktaJobsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/StartJob", runtime.WithHTTPPathPattern("/api/v1/job/start"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/StartJob")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -450,7 +450,7 @@ func RegisterBaktaJobsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobsStatus", runtime.WithHTTPPathPattern("/api/v1/job/list"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobsStatus")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -470,7 +470,7 @@ func RegisterBaktaJobsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobResult", runtime.WithHTTPPathPattern("/api/v1/job/result"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/JobResult")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -490,7 +490,7 @@ func RegisterBaktaJobsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Version", runtime.WithHTTPPathPattern("/api/v1/version"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Version")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -510,7 +510,7 @@ func RegisterBaktaJobsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Delete", runtime.WithHTTPPathPattern("/api/v1/delete"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/bakta.web.api.proto.v1.BaktaJobs/Delete")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
